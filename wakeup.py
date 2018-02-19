@@ -6,7 +6,7 @@
 import gdata.calendar.service as GServ            #for connection with GCalendar
 import time
 import os
-import random                                     #to play the mp3 later
+# import random                                     #to play the mp3 later
 from ConfigParser import SafeConfigParser
 from feed.date.rfc3339 import tf_from_timestamp   #also for the comparator
 from datetime import datetime, timedelta          #for the time on the rpi end
@@ -23,7 +23,7 @@ parser.read('wakeup.cfg')
 email = parser.get('credentials', 'email')
 password = parser.get('credentials', 'password')
 q = parser.get('alarm', 'query')
-mp3_path = parser.get('alarm', 'mp3_path')
+# mp3_path = parser.get('alarm', 'mp3_path')
 calendar = parser.get('alarm', 'calendar')
 
 date = (datetime.now() +timedelta(days=-1)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
@@ -57,11 +57,11 @@ def FullTextQuery(calendar_service):
             if time.strftime('%d-%m-%Y %H:%M',time.localtime(tf_from_timestamp(a_when.start_time))) == time.strftime('%d-%m-%Y %H:%M'):
                 print "Waking you up!"
                 print "---" 
-                songfile = random.choice(os.listdir(mp3_path)) #  choosing by random an .mp3 file from direcotry
-                print "Now Playing:", songfile
+               # songfile = random.choice(os.listdir(mp3_path)) #  choosing by random an .mp3 file from direcotry
+               # print "Now Playing:", songfile
                                                                #  plays the MP3 in it's entierty. As long as the file is longer 
                                                                #  than a minute it will only be played once:
-                command ="mpg321" + " " + mp3_path + "'"+songfile+"'"+ " -g 100" 
+                command ="sudo service radiod start" 
                 print command
                 os.system(command)                             #  plays the song
             else:
