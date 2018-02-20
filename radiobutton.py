@@ -13,7 +13,7 @@ GPIO.setup(16, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 def RadioOn(channel):  
    os.system("sudo service radiod start")  
 def RadioOff(channel):
-   os.system("sudo service radiod start")
+   os.system("sudo service radiod stop")
 # Add our function to execute when the button pressed event happens 
 GPIO.add_event_detect(12, GPIO.FALLING, callback = RadioOn, bouncetime = 2000)  
 GPIO.add_event_detect(16, GPIO.FALLING, callback = RadioOff, bouncetime = 2000) 
